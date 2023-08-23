@@ -1,0 +1,4 @@
+gym==0.25.2
+pygame==2.5.1
+tensorflow
+keras-rl2

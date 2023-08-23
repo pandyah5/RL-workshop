@@ -1,11 +1,12 @@
 import gym  # pip install gym
 import numpy as np
+import tensorflow as tf
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras.optimizers import Adam
 
-from rl.agents import DQNAgent  # pip install keras-rl2
+from rl.agents.dqn import DQNAgent  # pip install keras-rl2
 from rl.policy import BoltzmannQPolicy  # important to have gym==0.25.2
 from rl.memory import SequentialMemory
 
@@ -35,7 +36,7 @@ agent = DQNAgent(
 print(env)
 print(env.observation_space)
 
-agent.compile(Adam(lr=0.001), metrics=["mae"])
+agent.compile(tf.keras.optimizers.legacy.Adam(learning_rate=1e-3), metrics=["mae"])
 agent.fit(env, nb_steps=100000, visualize=False, verbose=1)
 
 results = agent.test(env, nb_episodes=10, visualize=True)
